@@ -2,11 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Models\Modelmarketing;
-use App\Models\Modeldatamarketing;
+use App\Models\Modeluser;
+use App\Models\Modeldatauser;
 use Config\Services;
 
-class Marketing extends BaseController
+class User extends BaseController
 {
     public function index()
     {
@@ -14,7 +14,7 @@ class Marketing extends BaseController
         // if (cekakses()) 
         {
 
-            return view('marketing/viewtampildata');
+            return view('user/viewtampildata');
         }
     }
 
@@ -22,11 +22,11 @@ class Marketing extends BaseController
     {
         if ($this->request->isAJAX()) {
             $data =  [
-                'tampildata' => $this->markt->findAll()
+                'tampildata' => $this->usr->findAll()
             ];
 
             $msg = [
-                'data' => view('marketing/datamarketing', $data)
+                'data' => view('user/datauser', $data)
             ];
 
             echo json_encode($msg);
@@ -39,7 +39,7 @@ class Marketing extends BaseController
     public function listdata()
     {
         $request = Services::request();
-        $datamodel = new Modeldatamarketing($request);
+        $datamodel = new Modeldatauser($request);
         if ($request->getMethod(true) == 'POST') {
             $lists = $datamodel->get_datatables();
             $data = [];
@@ -48,25 +48,20 @@ class Marketing extends BaseController
                 $no++;
                 $row = [];
 
-                $tomboledit = "<button type=\"button\" class=\"btn btn-info btn-sm\" onclick=\"edit('" . $list->id . "')\"><i class=\"fa fa-tags\"></i></button>";
+                $tomboledit = "<button type=\"button\" class=\"btn btn-info btn-sm\" onclick=\"edit('" . $list->id_user . "')\"><i class=\"fa fa-tags\"></i></button>";
 
-                $tombolhapus = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"hapus('" . $list->id . "')\">
+                $tombolhapus = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"hapus('" . $list->id_user . "')\">
                 <i class=\"fa fa-trash\"></i>
             </button>";
 
-            //     $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id . "')\">
+            //     $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id_user . "')\">
             //     <i class=\"fa fa-image\"></i>
             // </button>";
 
-                $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
+                // $row[] = "<input type=\"checkbox\" name=\"id_user[]\" class=\"centangId\" value=\"$list->id_user\">";
                 $row[] = $no;
-                $row[] = $list->no_order;
-                $row[] = $list->tgl_order;
-                $row[] = $list->nama_cust;
-                $row[] = $list->kota_tujuan;
-                $row[] = $list->nama_vendor;
-                $row[] = $list->nama_handling;
-                $row[] = $list->status_marketing;
+                $row[] = $list->nama_user;
+                $row[] = $list->email_user;
                 $row[] = $tomboledit . " " . $tombolhapus;
                 $data[] = $row;
             }
@@ -86,7 +81,7 @@ class Marketing extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('marketing/modaltambah')
+                'data' => view('user/modaltambah')
             ];
 
             echo json_encode($msg);
@@ -102,16 +97,23 @@ class Marketing extends BaseController
             $validation = \Config\Services::validation();
 
             $valid = $this->validate([
-                'no_order' => [
-                    'label' => 'Nomor Order',
-                    'rules' => 'required|is_unique[master_table.no_order]',
+                'nama_user' => [
+                    'label' => 'Nama user',
+                    'rules' => 'required|is_unique[users.nama_user]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                         'is_unique' => '{field} tidak boleh ada yang sama, silahkan coba yang lain'
                     ]
                 ],
-                'nama_cust' => [
-                    'label' => 'Nama Customer',
+                'email_user' => [
+                    'label' => 'Email user',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'password_user' => [
+                    'label' => 'Password user',
                     'rules' => 'required',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
@@ -123,27 +125,24 @@ class Marketing extends BaseController
 
                 $msg = [
                     'error' => [
-                        'no_order' => $validation->getError('no_order'),
-                        'nama_cust' => $validation->getError('nama_cust')
+                        'nama_user' => $validation->getError('nama_user'),
+                        'email_user' => $validation->getError('email_user'),
+                        'password_user' => $validation->getError('password_user')
                     ]
                 ];
             } else {
                 $simpandata = [
-                    'no_order' => $this->request->getVar('no_order'),
-                    'tgl_order' => $this->request->getVar('tgl_order'),
-                    'nama_cust' => $this->request->getVar('nama_cust'),
-                    'kota_tujuan' => $this->request->getVar('kota_tujuan'),
-                    'nama_vendor' => $this->request->getVar('nama_vendor'),
-                    'nama_handling' => $this->request->getVar('nama_handling'),
-                    'status_marketing' => $this->request->getVar('status_marketing'),
+                    'nama_user' => $this->request->getVar('nama_user'),
+                    'email_user' => $this->request->getVar('email_user'),
+                    'password_user' => $this->request->getVar('password_user'),
 
                 ];
 
 
-                $this->markt->insert($simpandata);
+                $this->usr->insert($simpandata);
 
                 $msg = [
-                    'sukses' => 'Data marketing berhasil tersimpan'
+                    'sukses' => 'Data user berhasil tersimpan'
                 ];
             }
             echo json_encode($msg);
@@ -155,23 +154,19 @@ class Marketing extends BaseController
     public function formedit()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            $id_user = $this->request->getVar('id_user');
 
-            $row = $this->markt->find($id);
+            $row = $this->usr->find($id_user);
 
             $data = [
-                'id' => $row['id'],
-                'no_order' => $row['no_order'],
-                'tgl_order' => $row['tgl_order'],
-                'nama_cust' => $row['nama_cust'],
-                'kota_tujuan' => $row['kota_tujuan'],
-                'nama_vendor' => $row['nama_vendor'],
-                'nama_handling' => $row['nama_handling'],
-                'status_marketing' => $row['status_marketing'],
+                'id_user' => $row['id_user'],
+                'nama_user' => $row['nama_user'],
+                'email_user' => $row['email_user'],
+                'password_user' => $row['password_user'],
             ];
 
             $msg = [
-                'sukses' => view('marketing/modaledit', $data)
+                'sukses' => view('user/modaledit', $data)
             ];
 
             echo json_encode($msg);
@@ -183,24 +178,20 @@ class Marketing extends BaseController
         if ($this->request->isAJAX()) {
 
             $simpandata = [
-                'id' => $this->request->getVar('id'),
-                'no_order' => $this->request->getVar('no_order'),
-                'tgl_order' => $this->request->getVar('tgl_order'),
-                'nama_cust' => $this->request->getVar('nama_cust'),
-                'kota_tujuan' => $this->request->getVar('kota_tujuan'),
-                'nama_vendor' => $this->request->getVar('nama_vendor'),
-                'nama_handling' => $this->request->getVar('nama_handling'),
-                'status_marketing' => $this->request->getVar('status_marketing'),
+                'id_user' => $this->request->getVar('id_user'),
+                'nama_user' => $this->request->getVar('nama_user'),
+                'email_user' => $this->request->getVar('email_user'),
+                'password_user' => $this->request->getVar('password_user'),
 
             ];
 
 
-            $id= $this->request->getVar('id');
+            $id_user = $this->request->getVar('id_user');
 
-            $this->markt->update($id, $simpandata);
+            $this->usr->update($id_user, $simpandata);
 
             $msg = [
-                'sukses' => 'Data marketing berhasil diupdate'
+                'sukses' => 'Data user berhasil diupdate'
             ];
             echo json_encode($msg);
         } else {
@@ -211,12 +202,14 @@ class Marketing extends BaseController
     public function hapus()
     {
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            $id_user = $this->request->getVar('id_user');
 
-            $this->markt->delete($id);
+            // $mhs = new Modelmahasiswa;
+
+            $this->usr->delete($id_user);
 
             $msg = [
-                'sukses' => "Data marketing berhasil di hapus"
+                'sukses' => "Data user berhasil di hapus"
             ];
             echo json_encode($msg);
         }
@@ -228,7 +221,7 @@ class Marketing extends BaseController
     // {
     //     if ($this->request->isAJAX()) {
     //         $msg = [
-    //             'data' => view('marketing/formtambahbanyak')
+    //             'data' => view('user/formtambahbanyak')
     //         ];
 
     //         echo json_encode($msg);
@@ -238,24 +231,24 @@ class Marketing extends BaseController
     // public function simpandatabanyak()
     // {
     //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
-    //         $nama_vendor = $this->request->getVar('nama_vendor');
-    //         $alamat_vendor = $this->request->getVar('alamat_vendor');
-    //         $telp_vendor = $this->request->getVar('telp_vendor');
+    //         $id_user = $this->request->getVar('id_user');
+    //         $nama_user = $this->request->getVar('nama_user');
+    //         $alamat_user = $this->request->getVar('alamat_user');
+    //         $telp_user = $this->request->getVar('telp_user');
 
-    //         $jmldata = count($id_vendor);
+    //         $jmldata = count($id_user);
 
     //         for ($i = 0; $i < $jmldata; $i++) {
-    //             $this->vend->insert([
-    //                 'id_vendor' => $id_vendor[$i],
-    //                 'nama_vendor' => $nama_vendor[$i],
-    //                 'alamat_vendor' => $alamat_vendor[$i],
-    //                 'telp_vendor' => $telp_vendor[$i],
+    //             $this->usr->insert([
+    //                 'id_user' => $id_user[$i],
+    //                 'nama_user' => $nama_user[$i],
+    //                 'alamat_user' => $alamat_user[$i],
+    //                 'telp_user' => $telp_user[$i],
     //             ]);
     //         }
 
     //         $msg = [
-    //             'sukses' => "$jmldata data vendor berhasil tersimpan"
+    //             'sukses' => "$jmldata data user berhasil tersimpan"
     //         ];
 
     //         echo json_encode($msg);
@@ -265,16 +258,16 @@ class Marketing extends BaseController
     // public function hapusbanyak()
     // {
     //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
+    //         $id_user = $this->request->getVar('id_user');
 
-    //         $jmldata = count($id_vendor);
+    //         $jmldata = count($id_user);
 
     //         for ($i = 0; $i < $jmldata; $i++) {
-    //             $this->vend->delete($id_vendor[$i]);
+    //             $this->usr->delete($id_user[$i]);
     //         }
 
     //         $msg = [
-    //             'sukses' => "$jmldata data vendor berhasil dihapus"
+    //             'sukses' => "$jmldata data user berhasil dihapus"
     //         ];
 
     //         echo json_encode($msg);
@@ -284,14 +277,14 @@ class Marketing extends BaseController
     // public function formupload()
     // {
     //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
+    //         $id_user = $this->request->getVar('id_user');
 
     //         $data = [
-    //             'id_vendor' => $id_vendor
+    //             'id_user' => $id_user
     //         ];
 
     //         $msg = [
-    //             'sukses' => view('marketing/modalupload', $data)
+    //             'sukses' => view('user/modalupload', $data)
     //         ];
 
     //         echo json_encode($msg);
@@ -301,7 +294,7 @@ class Marketing extends BaseController
     // public function doupload()
     // {
     //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
+    //         $id_user = $this->request->getVar('id_user');
 
     //         $validation = \Config\Services::validation();
 
@@ -310,7 +303,7 @@ class Marketing extends BaseController
     //         } elseif ($_FILES['foto']['name'] == NULL) {
 
     //             //cek dulu fotonya
-    //             $cekdata = $this->vend->find($id_vendor);
+    //             $cekdata = $this->usr->find($id_user);
     //             $fotolama = $cekdata['foto'];
     //             if ($fotolama != NULL || $fotolama != "") {
     //                 unlink($fotolama);
@@ -321,14 +314,14 @@ class Marketing extends BaseController
 
     //             $image = base64_decode($image, true);
     //             // echo $image;
-    //             $filename = $nobp . '.jpg';
+    //             $filename = $id_user . '.jpg';
     //             file_put_contents(FCPATH . '/assets/images/foto/' . $filename, $image);
 
     //             $updatedata = [
     //                 'foto' => './assets/images/foto/' . $filename
     //             ];
 
-    //             $this->vend->update($id_vendor, $updatedata);
+    //             $this->usr->update($id_user, $updatedata);
     //             $msg = [
     //                 'sukses' => 'Foto berhasil di upload menggunakan webcam'
     //             ];
@@ -354,7 +347,7 @@ class Marketing extends BaseController
     //             } else {
 
     //                 //cek dulu fotonya
-    //                 $cekdata = $this->vend->find($id_vendor);
+    //                 $cekdata = $this->usr->find($id_user);
     //                 $fotolama = $cekdata['foto'];
     //                 if ($fotolama != NULL || $fotolama != "") {
     //                     unlink($fotolama);
@@ -369,7 +362,7 @@ class Marketing extends BaseController
     //                     'foto' => './assets/images/foto/' . $filefoto->getName()
     //                 ];
 
-    //                 $this->vend->update($id_vendor, $updatedata);
+    //                 $this->usr->update($id_user, $updatedata);
 
     //                 $msg = [
     //                     'sukses' => 'Berhasil diupload'

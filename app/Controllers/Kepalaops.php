@@ -48,9 +48,9 @@ class Kepalaops extends BaseController
                 $no++;
                 $row = [];
 
-                $tomboledit = "<button type=\"button\" class=\"btn btn-info btn-sm\" onclick=\"edit('" . $list->id_kepalaops . "')\"><i class=\"fa fa-tags\"></i></button>";
+                $tomboledit = "<button type=\"button\" class=\"btn btn-info btn-sm\" onclick=\"edit('" . $list->id . "')\"><i class=\"fa fa-tags\"></i></button>";
 
-                $tombolhapus = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"hapus('" . $list->id_kepalaops . "')\">
+                $tombolhapus = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"hapus('" . $list->id . "')\">
                 <i class=\"fa fa-trash\"></i>
             </button>";
 
@@ -58,16 +58,15 @@ class Kepalaops extends BaseController
             //     <i class=\"fa fa-image\"></i>
             // </button>";
 
-                $row[] = "<input type=\"checkbox\" name=\"id_kepalaops[]\" class=\"centangId\" value=\"$list->id_kepalaops\">";
+                // $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
                 $row[] = $no;
                 $row[] = $list->no_order;
-                $row[] = $list->tgl_order;
                 $row[] = $list->jenis_armada;
                 $row[] = $list->data_armada;
-                $row[] = $list->staf_ops;
+                $row[] = $list->staf_ops;     
                 $row[] = $list->status_pickup;
                 $row[] = $list->status_loading;
-                $row[] = $list->nama_vendor;
+                $row[] = $list->nama_vendor2;
                 $row[] = $list->status_ops;
                 $row[] = $tomboledit . " " . $tombolhapus;
                 $data[] = $row;
@@ -106,14 +105,14 @@ class Kepalaops extends BaseController
             $valid = $this->validate([
                 'no_order' => [
                     'label' => 'Nomor Order',
-                    'rules' => 'required|is_unique[kepalaops.no_order]',
+                    'rules' => 'required|is_unique[master_table.no_order]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                         'is_unique' => '{field} tidak boleh ada yang sama, silahkan coba yang lain'
                     ]
                 ],
-                'tgl_order' => [
-                    'label' => 'Tanggal Order',
+                'staf_ops' => [
+                    'label' => 'Staff Operasional',
                     'rules' => 'required',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
@@ -126,19 +125,18 @@ class Kepalaops extends BaseController
                 $msg = [
                     'error' => [
                         'no_order' => $validation->getError('no_order'),
-                        'tgl_order' => $validation->getError('tgl_order')
+                        'staf_ops' => $validation->getError('staf_ops')
                     ]
                 ];
             } else {
                 $simpandata = [
                     'no_order' => $this->request->getVar('no_order'),
-                    'tgl_order' => $this->request->getVar('tgl_order'),
                     'jenis_armada' => $this->request->getVar('jenis_armada'),
                     'data_armada' => $this->request->getVar('data_armada'),
                     'staf_ops' => $this->request->getVar('staf_ops'),
                     'status_pickup' => $this->request->getVar('status_pickup'),
                     'status_loading' => $this->request->getVar('status_loading'),
-                    'nama_vendor' => $this->request->getVar('nama_vendor'),
+                    'nama_vendor2' => $this->request->getVar('nama_vendor2'),
                     'status_ops' => $this->request->getVar('status_ops'),
 
                 ];
@@ -159,20 +157,19 @@ class Kepalaops extends BaseController
     public function formedit()
     {
         if ($this->request->isAJAX()) {
-            $id_kepalaops = $this->request->getVar('id_kepalaops');
+            $id = $this->request->getVar('id');
 
-            $row = $this->kops->find($id_kepalaops);
+            $row = $this->kops->find($id);
 
             $data = [
-                'id_kepalaops' => $row['id_kepalaops'],
+                'id' => $row['id'],
                 'no_order' => $row['no_order'],
-                'tgl_order' => $row['tgl_order'],
                 'jenis_armada' => $row['jenis_armada'],
                 'data_armada' => $row['data_armada'],
                 'staf_ops' => $row['staf_ops'],
                 'status_pickup' => $row['status_pickup'],
                 'status_loading' => $row['status_loading'],
-                'nama_vendor' => $row['nama_vendor'],
+                'nama_vendor2' => $row['nama_vendor2'],
                 'status_ops' => $row['status_ops'],
             ];
 
@@ -189,23 +186,22 @@ class Kepalaops extends BaseController
         if ($this->request->isAJAX()) {
 
             $simpandata = [
-                'id_kepalaops' => $this->request->getVar('id_kepalaops'),
+                'id' => $this->request->getVar('id'),
                 'no_order' => $this->request->getVar('no_order'),
-                'tgl_order' => $this->request->getVar('tgl_order'),
                 'jenis_armada' => $this->request->getVar('jenis_armada'),
                 'data_armada' => $this->request->getVar('data_armada'),
                 'staf_ops' => $this->request->getVar('staf_ops'),
                 'status_pickup' => $this->request->getVar('status_pickup'),
                 'status_loading' => $this->request->getVar('status_loading'),
-                'nama_vendor' => $this->request->getVar('nama_vendor'),
+                'nama_vendor2' => $this->request->getVar('nama_vendor2'),
                 'status_ops' => $this->request->getVar('status_ops'),
 
             ];
 
 
-            $id_kepalaops= $this->request->getVar('id_kepalaops');
+            $id= $this->request->getVar('id');
 
-            $this->kops->update($id_kepalaops, $simpandata);
+            $this->kops->update($id, $simpandata);
 
             $msg = [
                 'sukses' => 'Data kepala ops berhasil diupdate'
@@ -219,9 +215,9 @@ class Kepalaops extends BaseController
     public function hapus()
     {
         if ($this->request->isAJAX()) {
-            $id_kepalaops = $this->request->getVar('id_kepalaops');
+            $id = $this->request->getVar('id');
 
-            $this->kops->delete($id_kepalaops);
+            $this->kops->delete($id);
 
             $msg = [
                 'sukses' => "Data kepala ops berhasil di hapus"
@@ -232,21 +228,21 @@ class Kepalaops extends BaseController
 
 
 
-    public function formtambahbanyak()
-    {
-        if ($this->request->isAJAX()) {
-            $msg = [
-                'data' => view('kepalaops/formtambahbanyak')
-            ];
+    // public function formtambahbanyak()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $msg = [
+    //             'data' => view('kepalaops/formtambahbanyak')
+    //         ];
 
-            echo json_encode($msg);
-        }
-    }
+    //         echo json_encode($msg);
+    //     }
+    // }
 
     // public function simpandatabanyak()
     // {
     //     if ($this->request->isAJAX()) {
-    //         $id = $this->request->getVar('id');
+    //         $id_vendor = $this->request->getVar('id_vendor');
     //         $nama_vendor = $this->request->getVar('nama_vendor');
     //         $alamat_vendor = $this->request->getVar('alamat_vendor');
     //         $telp_vendor = $this->request->getVar('telp_vendor');
@@ -270,24 +266,24 @@ class Kepalaops extends BaseController
     //     }
     // }
 
-    public function hapusbanyak()
-    {
-        if ($this->request->isAJAX()) {
-            $id_kepalaops = $this->request->getVar('id_kepalaops');
+    // public function hapusbanyak()
+    // {
+    //     if ($this->request->isAJAX()) {
+    //         $id_vendor = $this->request->getVar('id_vendor');
 
-            $jmldata = count($id_kepalaops);
+    //         $jmldata = count($id_vendor);
 
-            for ($i = 0; $i < $jmldata; $i++) {
-                $this->kops->delete($id_kepalaops[$i]);
-            }
+    //         for ($i = 0; $i < $jmldata; $i++) {
+    //             $this->vend->delete($id_vendor[$i]);
+    //         }
 
-            $msg = [
-                'sukses' => "$jmldata data kepala ops berhasil dihapus"
-            ];
+    //         $msg = [
+    //             'sukses' => "$jmldata data vendor berhasil dihapus"
+    //         ];
 
-            echo json_encode($msg);
-        }
-    }
+    //         echo json_encode($msg);
+    //     }
+    // }
 
     // public function formupload()
     // {

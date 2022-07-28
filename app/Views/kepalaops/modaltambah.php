@@ -4,54 +4,66 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Marketing</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Kepala OPS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open('marketing/simpandata', ['class' => 'formmarketing']) ?>
+            <?= form_open('kepalaops/simpandata', ['class' => 'formkepalaops']) ?>
             <?= csrf_field(); ?>
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">No Order</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="no_order" name="no_order">
+                        <div class="invalid-feedback errorNoOrder">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tanggal Order</label>
+                    <label for="" class="col-sm-4 col-form-label">Jenis Armada</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="tgl_order" name="tgl_order">
+                        <input type="text" class="form-control" id="jenis_armada" name="jenis_armada">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="nama_cust" name="nama_cust">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Kota Tujuan</label>
+                    <label for="" class="col-sm-4 col-form-label">Data Armada</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="kota_tujuan" name="kota_tujuan">
+                        <input type="text" class="form-control" id="data_armada" name="data_armada">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Staff Operasional</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="staf_ops" name="staf_ops">
+                        <div class="invalid-feedback errorStaf">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Status Pickup</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="status_pickup" name="status_pickup">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Status Loading</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="status_loading" name="status_loading">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="nama_vendor" name="nama_vendor">
+                        <input type="text" class="form-control" id="nama_vendor2" name="nama_vendor2">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Handling</label>
+                    <label for="" class="col-sm-4 col-form-label">Status Operasional</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="nama_handling" name="nama_handling">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Marketing</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="status_marketing" name="status_marketing">
+                        <input type="text" class="form-control" id="status_ops" name="status_ops">
                     </div>
                 </div>
                 
@@ -68,7 +80,7 @@
 <script>
     
 $(document).ready(function() {
-    $('.formmarketing').submit(function(e) {
+    $('.formkepalaops').submit(function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
@@ -85,20 +97,20 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.error) {
-                    if (response.error.nama_vendor) {
-                        $('#nama_vendor').addClass('is-invalid');
-                        $('.errorNama').html(response.error.nama_vendor);
+                    if (response.error.no_order) {
+                        $('#no_order').addClass('is-invalid');
+                        $('.errorNoOrder').html(response.error.no_order);
                     } else {
-                        $('#nama_vendor').removeClass('is-invalid');
-                        $('.errorNama').html('');
+                        $('#no_order').removeClass('is-invalid');
+                        $('.errorNoOrder').html('');
                     }
 
-                    if (response.error.telp_vendor) {
-                        $('#telp_vendor').addClass('is-invalid');
-                        $('.errorTelp').html(response.error.telp_vendor);
+                    if (response.error.staf_ops) {
+                        $('#staf_ops').addClass('is-invalid');
+                        $('.errorStaf').html(response.error.staf_ops);
                     } else {
-                        $('#telp_vendor').removeClass('is-invalid');
-                        $('.errorTelp').html('');
+                        $('#staf_ops').removeClass('is-invalid');
+                        $('.errorStaf').html('');
                     }
                 } else {
                     Swal.fire({
@@ -108,7 +120,7 @@ $(document).ready(function() {
                     })
 
                     $('#modaltambah').modal('hide');
-                    datamarketing();
+                    datakepalaops();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {

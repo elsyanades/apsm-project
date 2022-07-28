@@ -22,11 +22,11 @@
     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-file"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
     <ul class="list-unstyled">
         <li><a href="customer">Data Customer</a></li>
-        <li><a href="vendor">Data Vendor</a></li>
+        <li><a href="vendors">Data Vendor</a></li>
     </ul>
 </li>
 <li>
-    <a href="home" class="waves-effect">
+    <a href="user" class="waves-effect">
         <i class="mdi mdi-account-plus"></i>
         <span> User </span>
     </a>

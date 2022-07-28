@@ -1,58 +1,34 @@
 <!-- Modal -->
 <div class="modal fade" id="modaledit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Marketing</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Vendor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open('marketing/updatedata', ['class' => 'formmarketing']) ?>
+            <?= form_open('vendors/updatedata', ['class' => 'formvendor']) ?>
             <?= csrf_field(); ?>
-            <input type="hidden" value="<?= $id?>" name="id">
+            <input type="hidden" value="<?= $id_vendor ?>" name="id_vendor">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Order</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="no_order" name="no_order" value="<?= $no_order ?>" readonly>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tanggal Order</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="tgl_order" name="tgl_order" value="<?= $tgl_order ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="nama_cust" name="nama_cust" value="<?= $nama_cust ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Kota Tujuan</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="kota_tujuan" name="kota_tujuan" value="<?= $kota_tujuan; ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control" id="nama_vendor" name="nama_vendor" value="<?= $nama_vendor ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Handling</label>
+                    <label for="" class="col-sm-4 col-form-label">Alamat Vendor</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="nama_handling" name="nama_handling" value="<?= $nama_handling ?>">
+                        <input type="text" class="form-control" id="alamat_vendor" name="alamat_vendor" value="<?= $alamat_vendor; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Marketing</label>
+                    <label for="" class="col-sm-4 col-form-label">Telepon Vendor</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="<?= $status_marketing ?>">
+                        <input type="text" class="form-control" id="telp_vendor" name="telp_vendor" value="<?= $telp_vendor ?>">
                     </div>
                 </div>
             </div>
@@ -67,7 +43,7 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('.formmarketing').submit(function(e) {
+    $('.formvendor').submit(function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
@@ -90,7 +66,7 @@ $(document).ready(function() {
                 })
 
                 $('#modaledit').modal('hide');
-                datamarketing();
+                datavendor();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" +

@@ -1,23 +1,19 @@
-<?= form_open('marketing/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
+<?= form_open('vendors/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
 <p>
     <button type="submit" class="btn btn-danger">
         <i class="fa fa-trash-o"></i> Hapus Banyak
     </button>
 </p>
-<table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datamarketing">
+<table class="table table-sm table-striped" id="datavendor" style="width: 100%;">
     <thead>
         <tr>
             <th>
                 <input type="checkbox" id="centangSemua">
             </th>
             <th>No</th>
-            <th>Nomor Order</th>
-            <th>Tanggal Order</th>
-            <th>Nama Customer</th>
-            <th>Kota Tujuan</th>
             <th>Nama Vendor</th>
-            <th>Nama Handling</th>
-            <th>Status Marketing</th>
+            <th>Alamat Vendor</th>
+            <th>Telepon Vendor</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -29,13 +25,13 @@
 </table>
 <?= form_close(); ?>
 <script>
-function listdatamarketing() {
-    var table = $('#datamarketing').DataTable({
+function listdatavendor() {
+    var table = $('#datavendor').DataTable({
         "processing": true,
         "serverSide": true,
         "order": [],
         "ajax": {
-            url: "<?= site_url('marketing/listdata') ?>",
+            url: "<?= site_url('vendors/listdata') ?>",
             type: "POST"
         },
         //optional
@@ -48,21 +44,15 @@ function listdatamarketing() {
                 "orderable": false,
             },
             {
-                "targets": 8,
+                "targets": 5,
                 "orderable": false,
             }
         ],
-        responsive: true,
-        buttons: ['copy', 'excel', 'pdf', 'print'],
-        initComplete: function () {
-                table.buttons().container()
-                    .appendTo( $('.col-md-6:eq(0)', table.table().container() ) );
-            }
-    });
+    })
 }
 $(document).ready(function() {
     // $('#datamahasiswa').DataTable();
-    listdatamarketing();
+    listdatavendor();
 
     $('#centangSemua').click(function(e) {
 
@@ -89,7 +79,7 @@ $(document).ready(function() {
 
             Swal.fire({
                 title: 'Hapus Data Banyak',
-                text: `Yakin data marketing dihapus sebanyak ${jmldata.length} data ?`,
+                text: `Yakin data vendor dihapus sebanyak ${jmldata.length} data ?`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -110,7 +100,7 @@ $(document).ready(function() {
                                     title: 'Berhasil',
                                     text: response.sukses
                                 });
-                                datamarketing();
+                                datavendor();
                             }
                         },
                         error: function(xhr, ajaxOptions, thrownError) {
@@ -129,12 +119,12 @@ $(document).ready(function() {
 
 });
 
-function edit(id) {
+function edit(id_vendor) {
     $.ajax({
         type: "post",
-        url: "<?= site_url('marketing/formedit') ?>",
+        url: "<?= site_url('vendors/formedit') ?>",
         data: {
-            id: id
+            id_vendor: id_vendor
         },
         dataType: "json",
         success: function(response) {
@@ -150,10 +140,10 @@ function edit(id) {
     });
 }
 
-function hapus(id) {
+function hapus(id_vendor) {
     Swal.fire({
         title: 'Hapus',
-        text: `Yakin menghapus data marketing ini ?`,
+        text: `Yakin menghapus data vendor ini ?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -164,9 +154,9 @@ function hapus(id) {
         if (result.value) {
             $.ajax({
                 type: "post",
-                url: "<?= site_url('marketing/hapus') ?>",
+                url: "<?= site_url('vendors/hapus') ?>",
                 data: {
-                    id: id
+                    id_vendor: id_vendor
                 },
                 dataType: "json",
                 success: function(response) {
@@ -176,7 +166,7 @@ function hapus(id) {
                             title: 'Berhasil',
                             text: response.sukses,
                         });
-                        datamarketing();
+                        datavendor();
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -188,24 +178,24 @@ function hapus(id) {
     })
 }
 
-// function upload(id) {
-//     $.ajax({
-//         type: "post",
-//         url: "<?= site_url('marketing/formupload') ?>",
-//         data: {
-//             id: id
-//         },
-//         dataType: "json",
-//         success: function(response) {
-//             if (response.sukses) {
-//                 $('.viewmodal').html(response.sukses).show();
-//                 $('#modalupload').modal('show');
-//             }
-//         },
-//         error: function(xhr, ajaxOptions, thrownError) {
-//             alert(xhr.status + "\n" + xhr.responseText + "\n" +
-//                 thrownError);
-//         }
-//     });
-// }
+function upload(id_vendor) {
+    $.ajax({
+        type: "post",
+        url: "<?= site_url('vendors/formupload') ?>",
+        data: {
+            id_vendor: id_vendor
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.sukses) {
+                $('.viewmodal').html(response.sukses).show();
+                $('#modalupload').modal('show');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                thrownError);
+        }
+    });
+}
 </script>

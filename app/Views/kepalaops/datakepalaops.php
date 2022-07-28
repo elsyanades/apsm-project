@@ -1,23 +1,24 @@
-<?= form_open('marketing/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
+<?= form_open('kepalaops/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
 <p>
-    <button type="submit" class="btn btn-danger">
+    <!-- <button type="submit" class="btn btn-danger">
         <i class="fa fa-trash-o"></i> Hapus Banyak
-    </button>
+    </button> -->
 </p>
-<table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datamarketing">
+<table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datakepalaops">
     <thead>
         <tr>
-            <th>
+            <!-- <th>
                 <input type="checkbox" id="centangSemua">
-            </th>
+            </th> -->
             <th>No</th>
             <th>Nomor Order</th>
-            <th>Tanggal Order</th>
-            <th>Nama Customer</th>
-            <th>Kota Tujuan</th>
+            <th>Jenis Armada</th>
+            <th>Data Armada</th>
+            <th>Staff OPS</th>
+            <th>Status Pickup</th>
+            <th>Status Loading</th>
             <th>Nama Vendor</th>
-            <th>Nama Handling</th>
-            <th>Status Marketing</th>
+            <th>Status Kepala OPS</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -29,13 +30,13 @@
 </table>
 <?= form_close(); ?>
 <script>
-function listdatamarketing() {
-    var table = $('#datamarketing').DataTable({
+function listdatakepalaops() {
+    var table = $('#datakepalaops').DataTable({
         "processing": true,
         "serverSide": true,
         "order": [],
         "ajax": {
-            url: "<?= site_url('marketing/listdata') ?>",
+            url: "<?= site_url('kepalaops/listdata') ?>",
             type: "POST"
         },
         //optional
@@ -48,7 +49,7 @@ function listdatamarketing() {
                 "orderable": false,
             },
             {
-                "targets": 8,
+                "targets": 9,
                 "orderable": false,
             }
         ],
@@ -61,8 +62,7 @@ function listdatamarketing() {
     });
 }
 $(document).ready(function() {
-    // $('#datamahasiswa').DataTable();
-    listdatamarketing();
+    listdatakepalaops();
 
     $('#centangSemua').click(function(e) {
 
@@ -89,7 +89,7 @@ $(document).ready(function() {
 
             Swal.fire({
                 title: 'Hapus Data Banyak',
-                text: `Yakin data marketing dihapus sebanyak ${jmldata.length} data ?`,
+                text: `Yakin data kepalaops dihapus sebanyak ${jmldata.length} data ?`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -110,7 +110,7 @@ $(document).ready(function() {
                                     title: 'Berhasil',
                                     text: response.sukses
                                 });
-                                datamarketing();
+                                datakepalaops();
                             }
                         },
                         error: function(xhr, ajaxOptions, thrownError) {
@@ -132,7 +132,7 @@ $(document).ready(function() {
 function edit(id) {
     $.ajax({
         type: "post",
-        url: "<?= site_url('marketing/formedit') ?>",
+        url: "<?= site_url('kepalaops/formedit') ?>",
         data: {
             id: id
         },
@@ -153,7 +153,7 @@ function edit(id) {
 function hapus(id) {
     Swal.fire({
         title: 'Hapus',
-        text: `Yakin menghapus data marketing ini ?`,
+        text: `Yakin menghapus data kepalaops ini ?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -164,7 +164,7 @@ function hapus(id) {
         if (result.value) {
             $.ajax({
                 type: "post",
-                url: "<?= site_url('marketing/hapus') ?>",
+                url: "<?= site_url('kepalaops/hapus') ?>",
                 data: {
                     id: id
                 },
@@ -176,7 +176,7 @@ function hapus(id) {
                             title: 'Berhasil',
                             text: response.sukses,
                         });
-                        datamarketing();
+                        datakepalaops();
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -188,24 +188,24 @@ function hapus(id) {
     })
 }
 
-// function upload(id) {
-//     $.ajax({
-//         type: "post",
-//         url: "<?= site_url('marketing/formupload') ?>",
-//         data: {
-//             id: id
-//         },
-//         dataType: "json",
-//         success: function(response) {
-//             if (response.sukses) {
-//                 $('.viewmodal').html(response.sukses).show();
-//                 $('#modalupload').modal('show');
-//             }
-//         },
-//         error: function(xhr, ajaxOptions, thrownError) {
-//             alert(xhr.status + "\n" + xhr.responseText + "\n" +
-//                 thrownError);
-//         }
-//     });
-// }
+function upload(id) {
+    $.ajax({
+        type: "post",
+        url: "<?= site_url('kepalaops/formupload') ?>",
+        data: {
+            id: id
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.sukses) {
+                $('.viewmodal').html(response.sukses).show();
+                $('#modalupload').modal('show');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                thrownError);
+        }
+    });
+}
 </script>

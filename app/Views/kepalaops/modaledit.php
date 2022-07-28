@@ -4,55 +4,61 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Marketing</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Kepala OPS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open('marketing/updatedata', ['class' => 'formmarketing']) ?>
+            <?= form_open('kepalaops/updatedata', ['class' => 'formkepalaops']) ?>
             <?= csrf_field(); ?>
             <input type="hidden" value="<?= $id?>" name="id">
             <div class="modal-body">
-                <div class="form-group row">
+            <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">No Order</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="no_order" name="no_order" value="<?= $no_order ?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tanggal Order</label>
+                    <label for="" class="col-sm-4 col-form-label">Jenis Armada</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="tgl_order" name="tgl_order" value="<?= $tgl_order ?>">
+                        <input type="text" class="form-control" id="jenis_armada" name="jenis_armada" value="<?= $jenis_armada ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="nama_cust" name="nama_cust" value="<?= $nama_cust ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Kota Tujuan</label>
+                    <label for="" class="col-sm-4 col-form-label">Data Armada</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="kota_tujuan" name="kota_tujuan" value="<?= $kota_tujuan; ?>">
+                        <input type="text" class="form-control" id="data_armada" name="data_armada" value="<?= $data_armada ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Staff Operasional</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="staf_ops" name="staf_ops" value="<?= $staf_ops ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Status Pickup</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="status_pickup" name="status_pickup" value="<?= $status_pickup ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Status Loading</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="status_loading" name="status_loading" value="<?= $status_loading ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="nama_vendor" name="nama_vendor" value="<?= $nama_vendor ?>">
+                        <input type="text" class="form-control" id="nama_vendor2" name="nama_vendor2" value="<?= $nama_vendor2 ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Handling</label>
+                    <label for="" class="col-sm-4 col-form-label">Status Operasional</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="nama_handling" name="nama_handling" value="<?= $nama_handling ?>">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Marketing</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="<?= $status_marketing ?>">
+                        <input type="text" class="form-control" id="status_ops" name="status_ops" value="<?= $status_ops ?>">
                     </div>
                 </div>
             </div>
@@ -67,7 +73,7 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('.formmarketing').submit(function(e) {
+    $('.formkepalaops').submit(function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
@@ -90,7 +96,7 @@ $(document).ready(function() {
                 })
 
                 $('#modaledit').modal('hide');
-                datamarketing();
+                datakepalaops();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" +

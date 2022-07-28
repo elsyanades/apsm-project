@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\Modelvendor;
+use App\Models\Modeluser;
 use App\Models\Modelcustomer;
 use App\Models\Modelmarketing;
 use App\Models\Modelkepalaops;
@@ -54,9 +55,10 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
         $this->vend = new Modelvendor;
+        $this->usr = new Modeluser;
         $this->cust = new Modelcustomer;
         $this->markt = new Modelmarketing;
-        // $this->kops = new Modelkepalaops;
+        $this->kops = new Modelkepalaops;
         $this->adm = new Modeladmin;
     }
 }

@@ -14,7 +14,7 @@ class Vendor extends BaseController
         // if (cekakses()) 
         {
 
-            return view('vendor/viewtampildata');
+            return view('vendors/viewtampildata');
         }
     }
 
@@ -26,7 +26,7 @@ class Vendor extends BaseController
             ];
 
             $msg = [
-                'data' => view('vendor/datavendor', $data)
+                'data' => view('vendors/datavendor', $data)
             ];
 
             echo json_encode($msg);
@@ -159,7 +159,7 @@ class Vendor extends BaseController
             ];
 
             $msg = [
-                'sukses' => view('vendor/modaledit', $data)
+                'sukses' => view('vendors/modaledit', $data)
             ];
 
             echo json_encode($msg);
@@ -214,7 +214,7 @@ class Vendor extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('vendor/formtambahbanyak')
+                'data' => view('vendors/formtambahbanyak')
             ];
 
             echo json_encode($msg);
@@ -277,7 +277,7 @@ class Vendor extends BaseController
             ];
 
             $msg = [
-                'sukses' => view('vendor/modalupload', $data)
+                'sukses' => view('vendors/modalupload', $data)
             ];
 
             echo json_encode($msg);
