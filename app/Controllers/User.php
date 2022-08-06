@@ -101,7 +101,14 @@ class User extends BaseController
             $valid = $this->validate([
                 'nama_user' => [
                     'label' => 'Nama user',
-                    'rules' => 'required|is_unique[users.nama_user]',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'username' => [
+                    'label' => 'Username',
+                    'rules' => 'required|is_unique[users.username]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                         'is_unique' => '{field} tidak boleh ada yang sama, silahkan coba yang lain'
@@ -128,15 +135,19 @@ class User extends BaseController
                 $msg = [
                     'error' => [
                         'nama_user' => $validation->getError('nama_user'),
+                        'username' => $validation->getError('username'),
                         'email_user' => $validation->getError('email_user'),
-                        'password_user' => $validation->getError('password_user')
+                        'password_user' => $validation->getError('password_user'),
+                        'userlevelid' => $validation->getError('userlevelid'),
                     ]
                 ];
             } else {
                 $simpandata = [
                     'nama_user' => $this->request->getVar('nama_user'),
+                    'username' => $this->request->getVar('username'),
                     'email_user' => $this->request->getVar('email_user'),
-                    'password_user' => $this->request->getVar('password_user'),
+                    'password_user' => password_hash($this->request->getVar('password_user'), PASSWORD_DEFAULT),
+                    'userlevelid' => $this->request->getVar('userlevelid'),
 
                 ];
 
@@ -163,8 +174,10 @@ class User extends BaseController
             $data = [
                 'id_user' => $row['id_user'],
                 'nama_user' => $row['nama_user'],
+                'username' => $row['username'],
                 'email_user' => $row['email_user'],
                 'password_user' => $row['password_user'],
+                'userlevelid' => $row['userlevelid'],
             ];
 
             $msg = [
@@ -182,8 +195,10 @@ class User extends BaseController
             $simpandata = [
                 'id_user' => $this->request->getVar('id_user'),
                 'nama_user' => $this->request->getVar('nama_user'),
+                'username' => $this->request->getVar('username'),
                 'email_user' => $this->request->getVar('email_user'),
-                'password_user' => $this->request->getVar('password_user'),
+                'password_user' => password_hash($this->request->getVar('password_user'), PASSWORD_DEFAULT),
+                'userlevelid' => $this->request->getVar('userlevelid'),
 
             ];
 
@@ -205,8 +220,6 @@ class User extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id_user = $this->request->getVar('id_user');
-
-            // $mhs = new Modelmahasiswa;
 
             $this->usr->delete($id_user);
 

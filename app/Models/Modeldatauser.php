@@ -8,8 +8,8 @@ use CodeIgniter\Model;
 class Modeldatauser extends Model
 {
     protected $table = "users";
-    protected $column_order = array(null,'id_user','nama_user', 'email_user', 'password_user', null);
-    protected $column_search = array('nama_user', 'email_user');
+    protected $column_order = array(null,'id_user','nama_user', 'username','email_user', null);
+    protected $column_search = array('nama_user', 'email_user', 'username');
     protected $order = array('nama_user' => 'asc');
     protected $request;
     protected $db;
@@ -22,7 +22,7 @@ class Modeldatauser extends Model
         $this->request = $request;
 
         $this->dt = $this->db->table($this->table);
-        // $this->dt = $this->db->table($this->table)->select('*')->join('prodi', 'prodiid=mhsprodiid');
+        $this->dt = $this->db->table($this->table)->select('*')->join('levels', 'levelid=userlevelid');
     }
     private function _get_datatables_query()
     {

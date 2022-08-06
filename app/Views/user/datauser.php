@@ -12,7 +12,9 @@
             </th> -->
             <th>No</th>
             <th>Nama User</th>
+            <th>Username</th>
             <th>Email User</th>
+            <th>Level</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -43,7 +45,7 @@ function listdatauser() {
                 "orderable": false,
             },
             {
-                "targets": 3,
+                "targets": 4,
                 "orderable": false,
             }
         ],

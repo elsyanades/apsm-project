@@ -14,7 +14,7 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Nama User</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_user" name="nama_user">
                         <div class="invalid-feedback errorNama">
 
@@ -22,9 +22,18 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Username</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="username" name="username">
+                        <div class="invalid-feedback errorUsername">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Email User</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="email_user" name="email_user">
+                        <input type="email" class="form-control" id="email_user" name="email_user">
                         <div class="invalid-feedback errorEmail">
 
                         </div>
@@ -33,10 +42,24 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Password</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="password_user" name="password_user">
+                        <input type="password" class="form-control" id="password_user" name="password_user">
                         <div class="invalid-feedback errorPass">
 
                         </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Level</label>
+                    <div class="col-sm-6">
+                        <select name="userlevelid" id="userlevelid" class="form-control">
+                            <option value="">-Pilih-</option>
+                            <option value="1">Superuser</option>
+                            <option value="2">Marketing</option>
+                            <option value="3">Staff OPS</option>
+                            <option value="4">Kepala OPS</option>
+                            <option value="5">Monitoring CS</option>
+                            <option value="6">Admin</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -74,6 +97,13 @@ $(document).ready(function() {
                     } else {
                         $('#nama_user').removeClass('is-invalid');
                         $('.errorNama').html('');
+                    }
+                    if (response.error.username) {
+                        $('#username').addClass('is-invalid');
+                        $('.errorUsername').html(response.error.username);
+                    } else {
+                        $('#username').removeClass('is-invalid');
+                        $('.errorUsername').html('');
                     }
 
                     if (response.error.email_user) {

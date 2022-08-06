@@ -22,9 +22,8 @@
         <script src="<?=base_url()?>/template/assets/plugins/datatables/buttons.print.min.js"></script>
         <script src="<?=base_url()?>/template/assets/plugins/datatables/buttons.colVis.min.js"></script>
 
-        <div class="col-sm-12">
+<div class="col-sm-12">
     <div class="page-title-box">
-        <h4 class="page-title">Cetak Laporan</h4>
     </div>
 </div>
 
@@ -91,6 +90,10 @@
             </div>
         </div>
     </section>
+</div>
+<div class="col-sm-12">
+    <div class="page-title-box">
+    </div>
 </div>
 <script>
  var table = $('#laporan').DataTable({

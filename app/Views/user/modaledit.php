@@ -15,20 +15,39 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Nama user</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_user" name="nama_user" value="<?= $nama_user ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Username</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="username" name="username" value="<?= $username ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Email User</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="email_user" name="email_user" value="<?= $email_user; ?>">
+                        <input type="email" class="form-control" id="email_user" name="email_user" value="<?= $email_user; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-4 col-form-label">Password</label>
                     <div class="col-sm-6">
                         <input type="password" class="form-control" id="password_user" name="password_user" value="<?= $password_user ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-4 col-form-label">Level</label>
+                    <div class="col-sm-6">
+                        <select name="userlevelid" id="userlevelid" class="form-control">
+                            <option value="1" <?php if ($userlevelid == '1') echo "selected"; ?>>Superuser</option>
+                            <option value="2" <?php if ($userlevelid == '2') echo "selected"; ?>>Marketing</option>
+                            <option value="3" <?php if ($userlevelid == '3') echo "selected"; ?>>Staff OPS</option>
+                            <option value="4" <?php if ($userlevelid == '4') echo "selected"; ?>>Kepala OPS</option>
+                            <option value="5" <?php if ($userlevelid == '5') echo "selected"; ?>>Monitoring CS</option>
+                            <option value="6" <?php if ($userlevelid == '6') echo "selected"; ?>>Admin</option>
+                        </select>
                     </div>
                 </div>
             </div>

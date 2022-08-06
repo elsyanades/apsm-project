@@ -14,15 +14,18 @@
         <script src="<?=base_url()?>/template/assets/plugins/datatables/dataTables.responsive.min.js"></script>  
         <script src="<?=base_url()?>/template/assets/plugins/datatables/responsive.bootstrap4.min.js"></script> 
 
-        <div class="col-sm-12">
+<div class="col-sm-12">
     <div class="page-title-box">
-        <h4 class="page-title">Data Customer</h4>
     </div>
 </div>
 
 <div class="col-sm-12">
-    <div class="card m-b-30">
-        <div class="card-body">
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Data Customer</h4>
+            </div>
+            <div class="card-body">
 
             <div class="card-title">
                 <button type="button" class="btn btn-primary btn-sm tomboltambah">
@@ -33,10 +36,14 @@
                 </button>
             </div>
 
-            <p class="card-text viewdata">
+            <p class="card-text viewdata"> </p>
 
-            </p>
+            </div>
         </div>
+    </section>
+</div>
+<div class="col-sm-12">
+    <div class="page-title-box">
     </div>
 </div>
 <div class="viewmodal" style="display: none;"></div>
