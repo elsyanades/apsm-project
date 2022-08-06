@@ -10,8 +10,8 @@ class Marketing extends BaseController
 {
     public function index()
     {
-        // helper('Akses');
-        // if (cekakses()) 
+        helper('Akses');
+        if (cekaksesmarketing()) 
         {
 
             return view('marketing/viewtampildata');
@@ -58,7 +58,7 @@ class Marketing extends BaseController
             //     <i class=\"fa fa-image\"></i>
             // </button>";
 
-                $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
+                // $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
                 $row[] = $no;
                 $row[] = $list->no_order;
                 $row[] = $list->tgl_order;
@@ -110,8 +110,8 @@ class Marketing extends BaseController
                         'is_unique' => '{field} tidak boleh ada yang sama, silahkan coba yang lain'
                     ]
                 ],
-                'nama_cust' => [
-                    'label' => 'Nama Customer',
+                'tgl_order' => [
+                    'label' => 'Tanggal Order',
                     'rules' => 'required',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
@@ -124,7 +124,7 @@ class Marketing extends BaseController
                 $msg = [
                     'error' => [
                         'no_order' => $validation->getError('no_order'),
-                        'nama_cust' => $validation->getError('nama_cust')
+                        'tgl_order' => $validation->getError('tgl_order')
                     ]
                 ];
             } else {

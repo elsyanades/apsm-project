@@ -13,8 +13,8 @@
             <?= csrf_field(); ?>
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Order</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">No Order</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="no_order" name="no_order">
                         <div class="invalid-feedback errorNoOrder">
 
@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">Nama Customer</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_cust" name="nama_cust">
                         <div class="invalid-feedback errorNama">
 
@@ -31,19 +31,19 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Surat Jalan</label>
+                    <label for="" class="col-sm-5 col-form-label">No Surat Jalan</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="no_surat_jalan" name="no_surat_jalan">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Pembayaran</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Pembayaran</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_pembayaran" name="status_pembayaran">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status admin</label>
+                    <label for="" class="col-sm-5 col-form-label">Status admin</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_admin" name="status_admin">
                     </div>

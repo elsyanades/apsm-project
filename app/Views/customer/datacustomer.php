@@ -49,6 +49,7 @@ function listdatacustomer() {
                 "orderable": false,
             }
         ],
+        responsive: true,
     })
 }
 $(document).ready(function() {

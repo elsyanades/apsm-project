@@ -23,6 +23,13 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'ceklogin' => \App\Filters\Ceklogin::class,
+        'filtersuperuser' => \App\Filters\Filtersuperuser::class,
+        'filtermarketing' => \App\Filters\Filtermarketing::class,
+        'filterstaffops' => \App\Filters\Filterstaffops::class,
+        'filterkepalaops' => \App\Filters\Filterkepalaops::class,
+        'filtermonitoringcs' => \App\Filters\Filtermonitoringcs::class,
+        'filteradmin' => \App\Filters\Filteradmin::class,
     ];
 
     /**
@@ -36,11 +43,36 @@ class Filters extends BaseConfig
             // 'honeypot',
            // 'csrf',
             // 'invalidchars',
+            // 'filtersuperuser' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ],
+            // 'filtermarketing' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ],
+            // 'filterkepalaops' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ],
+            // 'filterstaffops' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ],
+            // 'filtermonitoringcs' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ],
+            // 'filteradmin' => [
+            //     'except' => ['login/*', 'login', '/']
+            // ]
         ],
         'after' => [
             'toolbar',
             // 'honeypot',
             // 'secureheaders',
+            // 'filtersuperuser' => ['except' => ['home/*','marketing/*','admin/*','monitoringcs/*','kepalaops/*','staffops/*','vendor/*','user/*','customer/*']],
+            // 'filtermarketing' => ['except' => ['home/*','marketing/*','vendor/*','user/*','customer/*']],
+            // 'filterkepalaops' => ['except' => ['home/*','kepalaops/*','vendor/*','user/*','customer/*']],
+            // 'filterstaffops' => ['except' => ['home/*','staffops/*','vendor/*','user/*','customer/*']],
+            // 'filtermonitoringcs' => ['except' => ['home/*','monitoringcs/*','vendor/*','user/*','customer/*']],
+            // 'filteradmin' => ['except' => ['home/*','admin/*','vendor/*','user/*','customer/*']],
+
         ],
     ];
 
@@ -68,5 +100,7 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+
+    ];
 }

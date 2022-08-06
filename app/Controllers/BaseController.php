@@ -13,8 +13,11 @@ use App\Models\Modelvendor;
 use App\Models\Modeluser;
 use App\Models\Modelcustomer;
 use App\Models\Modelmarketing;
+use App\Models\Modelmarketingproject;
 use App\Models\Modelkepalaops;
 use App\Models\Modeladmin;
+use App\Models\Modelmonitoringcs;
+use App\Models\Modelstaffops;
 /**
  * Class BaseController
  *
@@ -41,7 +44,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['form','url'];
+    protected $helpers = ['form','url','custom'];
 
     /**
      * Constructor.
@@ -53,12 +56,15 @@ abstract class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
         $this->vend = new Modelvendor;
         $this->usr = new Modeluser;
         $this->cust = new Modelcustomer;
         $this->markt = new Modelmarketing;
+        $this->markt_proj = new Modelmarketingproject;
         $this->kops = new Modelkepalaops;
         $this->adm = new Modeladmin;
+        $this->moncs = new Modelmonitoringcs;
+        $this->sops = new Modelstaffops;
     }
 }

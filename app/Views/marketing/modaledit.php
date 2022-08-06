@@ -4,7 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Marketing</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Marketing Retail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,43 +14,43 @@
             <input type="hidden" value="<?= $id?>" name="id">
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Order</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">No Order</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="no_order" name="no_order" value="<?= $no_order ?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tanggal Order</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="tgl_order" name="tgl_order" value="<?= $tgl_order ?>">
+                    <label for="" class="col-sm-5 col-form-label">Tanggal Order</label>
+                    <div class="col-sm-6">
+                    <input class="form-control" type="date" value="<?= $tgl_order ?>" id="tgl_order" name="tgl_order">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">Nama Customer</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_cust" name="nama_cust" value="<?= $nama_cust ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Kota Tujuan</label>
+                    <label for="" class="col-sm-5 col-form-label">Kota Tujuan</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="kota_tujuan" name="kota_tujuan" value="<?= $kota_tujuan; ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
+                    <label for="" class="col-sm-5 col-form-label">Nama Vendor</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_vendor" name="nama_vendor" value="<?= $nama_vendor ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Handling</label>
+                    <label for="" class="col-sm-5 col-form-label">Nama Handling</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_handling" name="nama_handling" value="<?= $nama_handling ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Marketing</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Marketing Retail</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_marketing" name="status_marketing" value="<?= $status_marketing ?>">
                     </div>
@@ -65,7 +65,12 @@
         </div>
     </div>
 </div>
-<script>
+<script> 
+$( function() {
+  $( "#date" ).datepicker({
+    dateFormat: "yyyy-mm-dd"
+  });
+});  
 $(document).ready(function() {
     $('.formmarketing').submit(function(e) {
         e.preventDefault();

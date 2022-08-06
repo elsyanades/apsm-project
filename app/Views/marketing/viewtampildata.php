@@ -1,7 +1,7 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('title') ?>
-<title>APSM | Data Marketing</title>
+<title>APSM | Data Marketing Retail</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -24,7 +24,7 @@
 
         <div class="col-sm-12">
     <div class="page-title-box">
-        <h4 class="page-title">Data Marketing</h4>
+        <h4 class="page-title">Data Marketing Retail</h4>
     </div>
 </div>
 

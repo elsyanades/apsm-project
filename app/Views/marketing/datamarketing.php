@@ -1,15 +1,15 @@
 <?= form_open('marketing/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
 <p>
-    <button type="submit" class="btn btn-danger">
+    <!-- <button type="submit" class="btn btn-danger">
         <i class="fa fa-trash-o"></i> Hapus Banyak
-    </button>
+    </button> -->
 </p>
 <table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datamarketing">
     <thead>
         <tr>
-            <th>
+            <!-- <th>
                 <input type="checkbox" id="centangSemua">
-            </th>
+            </th> -->
             <th>No</th>
             <th>Nomor Order</th>
             <th>Tanggal Order</th>
@@ -17,7 +17,7 @@
             <th>Kota Tujuan</th>
             <th>Nama Vendor</th>
             <th>Nama Handling</th>
-            <th>Status Marketing</th>
+            <th>Status Marketing Retail</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -48,7 +48,7 @@ function listdatamarketing() {
                 "orderable": false,
             },
             {
-                "targets": 8,
+                "targets": 7,
                 "orderable": false,
             }
         ],

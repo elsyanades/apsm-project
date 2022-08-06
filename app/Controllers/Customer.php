@@ -54,9 +54,9 @@ class Customer extends BaseController
                 <i class=\"fa fa-trash\"></i>
             </button>";
 
-                $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id_cust . "')\">
-                <i class=\"fa fa-image\"></i>
-            </button>";
+            //     $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id_cust . "')\">
+            //     <i class=\"fa fa-image\"></i>
+            // </button>";
 
                 $row[] = "<input type=\"checkbox\" name=\"id_cust[]\" class=\"centangId\" value=\"$list->id_cust\">";
                 $row[] = $no;
@@ -64,7 +64,7 @@ class Customer extends BaseController
                 $row[] = $list->alamat_cust;
                 $row[] = $list->telp_cust;
                 $row[] = $list->jabatan_cust;
-                $row[] = $tomboledit . " " . $tombolhapus . " " . $tombolupload;
+                $row[] = $tomboledit . " " . $tombolhapus;
                 $data[] = $row;
             }
             $output = [

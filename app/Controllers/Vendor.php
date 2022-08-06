@@ -54,16 +54,16 @@ class Vendor extends BaseController
                 <i class=\"fa fa-trash\"></i>
             </button>";
 
-                $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id_vendor . "')\">
-                <i class=\"fa fa-image\"></i>
-            </button>";
+            //     $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id_vendor . "')\">
+            //     <i class=\"fa fa-image\"></i>
+            // </button>";
 
                 $row[] = "<input type=\"checkbox\" name=\"id_vendor[]\" class=\"centangId\" value=\"$list->id_vendor\">";
                 $row[] = $no;
                 $row[] = $list->nama_vendor;
                 $row[] = $list->alamat_vendor;
                 $row[] = $list->telp_vendor;
-                $row[] = $tomboledit . " " . $tombolhapus . " " . $tombolupload;
+                $row[] = $tomboledit . " " . $tombolhapus;
                 $data[] = $row;
             }
             $output = [
@@ -82,7 +82,7 @@ class Vendor extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('vendor/modaltambah')
+                'data' => view('vendors/modaltambah')
             ];
 
             echo json_encode($msg);

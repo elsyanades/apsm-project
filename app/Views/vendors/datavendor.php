@@ -48,6 +48,7 @@ function listdatavendor() {
                 "orderable": false,
             }
         ],
+        responsive: true,
     })
 }
 $(document).ready(function() {

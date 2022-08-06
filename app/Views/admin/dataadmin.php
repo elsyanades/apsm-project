@@ -1,15 +1,15 @@
 <?= form_open('admin/hapusbanyak', ['class' => 'formhapusbanyak']) ?>
 <p>
-    <button type="submit" class="btn btn-danger">
+    <!-- <button type="submit" class="btn btn-danger">
         <i class="fa fa-trash-o"></i> Hapus Banyak
-    </button>
+    </button> -->
 </p>
 <table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="dataadmin">
     <thead>
         <tr>
-            <th>
+            <!-- <th>
                 <input type="checkbox" id="centangSemua">
-            </th>
+            </th> -->
             <th>No</th>
             <th>Nomor Order</th>
             <th>Nama Customer</th>

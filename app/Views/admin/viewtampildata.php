@@ -33,9 +33,9 @@
         <div class="card-body">
 
             <div class="card-title">
-                <button type="button" class="btn btn-primary btn-sm tomboltambah">
+                <!-- <button type="button" class="btn btn-primary btn-sm tomboltambah">
                     <i class="fa fa-plus-circle"></i> Tambah Data
-                </button>
+                </button> -->
                 <!-- <button type="button" class="btn btn-info btn-sm tomboltambahbanyak">
                     <i class="fa fa-plus-circle"></i> Tambah Data Banyak
                 </button> -->

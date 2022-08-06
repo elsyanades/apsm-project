@@ -14,49 +14,49 @@
             <input type="hidden" value="<?= $id?>" name="id">
             <div class="modal-body">
             <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Order</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">No Order</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="no_order" name="no_order" value="<?= $no_order ?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Jenis Armada</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">Jenis Armada</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="jenis_armada" name="jenis_armada" value="<?= $jenis_armada ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Data Armada</label>
+                    <label for="" class="col-sm-5 col-form-label">Data Armada</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="data_armada" name="data_armada" value="<?= $data_armada ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Staff Operasional</label>
+                    <label for="" class="col-sm-5 col-form-label">Staff Operasional</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="staf_ops" name="staf_ops" value="<?= $staf_ops ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Pickup</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Pickup</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_pickup" name="status_pickup" value="<?= $status_pickup ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Loading</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Loading</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_loading" name="status_loading" value="<?= $status_loading ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
+                    <label for="" class="col-sm-5 col-form-label">Nama Vendor</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_vendor2" name="nama_vendor2" value="<?= $nama_vendor2 ?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Operasional</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Operasional</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_ops" name="status_ops" value="<?= $status_ops ?>">
                     </div>

@@ -35,10 +35,15 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('home', 'Home::index');
+$routes->get('/', 'Login::index');
+$routes->post('login/cekuser', 'Login::cekuser');
+$routes->get('login', 'Login::index');
 
-$routes->get('customer', 'Customer::index');
+$routes->get('home', 'Home::index', ['filter' => 'ceklogin']);
+$routes->get('login/(:any)', 'Login::$1', ['filter' => 'ceklogin']);
+
+$routes->get('customer', 'Customer::index', ['filter' => 'ceklogin']);
+$routes->get('customer/(:any)', 'Customer::$1', ['filter' => 'ceklogin']);
 $routes->post('customer/listdata', 'Customer::listdata');
 $routes->get('customer/ambildata', 'Customer::ambildata');
 $routes->post('customer/simpandata', 'Customer::simpandata');
@@ -50,10 +55,9 @@ $routes->post('customer/formedit', 'Customer::formedit/$1');
 $routes->post('customer/hapus', 'Customer::hapus/$1');
 $routes->post('customer/hapusbanyak', 'Customer::hapusbanyak/$1');
 $routes->post('customer/updatedata', 'Customer::updatedata');
-$routes->post('customer/doupload', 'Customer::doupload');
-$routes->get('customer/(:any)', 'Customer::$1');
 
-$routes->get('user', 'User::index');
+$routes->get('user', 'User::index', ['filter' => 'ceklogin']);
+$routes->get('user/(:any)', 'User::$1', ['filter' => 'ceklogin']);
 $routes->post('user/listdata', 'User::listdata');
 $routes->get('user/ambildata', 'User::ambildata');
 $routes->post('user/simpandata', 'User::simpandata');
@@ -62,9 +66,9 @@ $routes->post('user/formupload', 'User::formupload');
 $routes->post('user/formedit', 'User::formedit/$1');
 $routes->post('user/hapus', 'User::hapus/$1');
 $routes->post('user/updatedata', 'User::updatedata');
-$routes->get('user/(:any)', 'User::$1');
 
-$routes->get('vendors', 'Vendor::index');
+$routes->get('vendors', 'Vendor::index', ['filter' => 'ceklogin']);
+$routes->get('vendors/(:any)', 'Vendor::$1', ['filter' => 'ceklogin']);
 $routes->post('vendors/listdata', 'Vendor::listdata');
 $routes->get('vendors/ambildata', 'Vendor::ambildata');
 $routes->post('vendors/simpandata', 'Vendor::simpandata');
@@ -77,50 +81,76 @@ $routes->post('vendors/hapus', 'Vendor::hapus/$1');
 $routes->post('vendors/hapusbanyak', 'Vendor::hapusbanyak/$1');
 $routes->post('vendors/updatedata', 'Vendor::updatedata');
 $routes->post('vendors/doupload', 'Vendor::doupload');
-$routes->get('vendors/(:any)', 'Vendor::$1');
 
-$routes->get('marketing', 'Marketing::index');
+$routes->get('marketing', 'Marketing::index', ['filter' => 'ceklogin']);
+$routes->get('marketing/(:any)', 'Marketing::$1', ['filter' => 'ceklogin']);
 $routes->post('marketing/listdata', 'Marketing::listdata');
 $routes->get('marketing/ambildata', 'Marketing::ambildata');
 $routes->post('marketing/simpandata', 'Marketing::simpandata');
-$routes->post('marketing/simpandatabanyak', 'Marketing::simpandatabanyak');
 $routes->get('marketing/formtambah', 'Marketing::formtambah');
 $routes->post('marketing/formupload', 'Marketing::formupload');
-$routes->get('marketing/formtambahbanyak', 'Marketing::formtambahbanyak');
 $routes->post('marketing/formedit', 'Marketing::formedit/$1');
 $routes->post('marketing/hapus', 'Marketing::hapus/$1');
-$routes->post('marketing/hapusbanyak', 'Marketing::hapusbanyak/$1');
 $routes->post('marketing/updatedata', 'Marketing::updatedata');
-$routes->get('marketing/(:any)', 'Marketing::$1');
 
-$routes->get('kepalaops', 'Kepalaops::index');
+$routes->get('marketingproject', 'Marketingproject::index', ['filter' => 'ceklogin']);
+$routes->get('marketingproject/(:any)', 'Marketingproject::$1', ['filter' => 'ceklogin']);
+$routes->post('marketingproject/listdata', 'Marketingproject::listdata');
+$routes->get('marketingproject/ambildata', 'Marketingproject::ambildata');
+$routes->post('marketingproject/simpandata', 'Marketingproject::simpandata');
+$routes->get('marketingproject/formtambah', 'Marketingproject::formtambah');
+$routes->post('marketingproject/formupload', 'Marketingproject::formupload');
+$routes->post('marketingproject/formedit', 'Marketingproject::formedit/$1');
+$routes->post('marketingproject/hapus', 'Marketingproject::hapus/$1');
+$routes->post('marketingproject/updatedata', 'Marketingproject::updatedata');
+
+$routes->get('kepalaops', 'Kepalaops::index', ['filter' => 'ceklogin']);
+$routes->get('kepalaops/(:any)', 'Kepalaops::$1', ['filter' => 'ceklogin']);
 $routes->post('kepalaops/listdata', 'Kepalaops::listdata');
 $routes->get('kepalaops/ambildata', 'Kepalaops::ambildata');
 $routes->post('kepalaops/simpandata', 'Kepalaops::simpandata');
-$routes->post('kepalaops/simpandatabanyak', 'Kepalaops::simpandatabanyak');
 $routes->get('kepalaops/formtambah', 'Kepalaops::formtambah');
 $routes->post('kepalaops/formupload', 'Kepalaops::formupload');
-$routes->get('kepalaops/formtambahbanyak', 'Kepalaops::formtambahbanyak');
 $routes->post('kepalaops/formedit', 'Kepalaops::formedit/$1');
 $routes->post('kepalaops/hapus', 'Kepalaops::hapus/$1');
-$routes->post('kepalaops/hapusbanyak', 'Kepalaops::hapusbanyak/$1');
 $routes->post('kepalaops/updatedata', 'Kepalaops::updatedata');
-$routes->get('kepalaops/(:any)', 'Kepalaops::$1');
 
-$routes->get('admin', 'Admin::index');
+$routes->get('admin', 'Admin::index', ['filter' => 'ceklogin']);
+$routes->get('admin/(:any)', 'Admin::$1', ['filter' => 'ceklogin']);
 $routes->post('admin/listdata', 'Admin::listdata');
 $routes->get('admin/ambildata', 'Admin::ambildata');
 $routes->post('admin/simpandata', 'Admin::simpandata');
-$routes->post('admin/simpandatabanyak', 'Admin::simpandatabanyak');
 $routes->get('admin/formtambah', 'Admin::formtambah');
 $routes->post('admin/formupload', 'Admin::formupload');
-$routes->get('admin/formtambahbanyak', 'Admin::formtambahbanyak');
 $routes->post('admin/formedit', 'Admin::formedit/$1');
 $routes->post('admin/hapus', 'Admin::hapus/$1');
-$routes->post('admin/hapusbanyak', 'Admin::hapusbanyak/$1');
 $routes->post('admin/updatedata', 'Admin::updatedata');
-$routes->get('admin/(:any)', 'Admin::$1');
 
+$routes->get('monitoringcs', 'Monitoringcs::index', ['filter' => 'ceklogin']);
+$routes->get('monitoringcs/(:any)', 'Monitoringcs::$1', ['filter' => 'ceklogin']);
+$routes->post('monitoringcs/listdata', 'Monitoringcs::listdata');
+$routes->get('monitoringcs/ambildata', 'Monitoringcs::ambildata');
+$routes->post('monitoringcs/simpandata', 'Monitoringcs::simpandata');
+$routes->get('monitoringcs/formtambah', 'Monitoringcs::formtambah');
+$routes->post('monitoringcs/formupload', 'Monitoringcs::formupload');
+$routes->post('monitoringcs/formedit', 'Monitoringcs::formedit/$1');
+$routes->post('monitoringcs/hapus', 'Monitoringcs::hapus/$1');
+$routes->post('monitoringcs/updatedata', 'Monitoringcs::updatedata');
+
+$routes->get('staffops', 'Staffops::index', ['filter' => 'ceklogin']);
+$routes->get('staffops/(:any)', 'Staffops::$1', ['filter' => 'ceklogin']);
+$routes->post('staffops/listdata', 'Staffops::listdata');
+$routes->get('staffops/ambildata', 'Staffops::ambildata');
+$routes->post('staffops/simpandata', 'Staffops::simpandata');
+$routes->get('staffops/formtambah', 'Staffops::formtambah');
+$routes->post('staffops/formupload', 'Staffops::formupload');
+$routes->post('staffops/formedit', 'Staffops::formedit/$1');
+$routes->post('staffops/hapus', 'Staffops::hapus/$1');
+$routes->post('staffops/updatedata', 'Staffops::updatedata');
+
+$routes->get('laporan', 'Laporan::viewlaporan', ['filter' => 'ceklogin']);
+$routes->post('/Laporan', 'Laporan::index', ['filter' => 'ceklogin']);
+$routes->get('laporan/(:any)', 'Laporan::$1', ['filter' => 'ceklogin']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -1,3 +1,6 @@
+<?php
+$session = \Config\Services::session();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +20,8 @@
         
         <script src="<?=base_url()?>/template/assets/js/jquery.min.js"></script>
         <link href="<?=base_url()?>/template/assets/plugins/node_modules/sweetalert2/dist/sweetalert2.min.css" type="text/css">
+        <link href="<?=base_url()?>/template/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet"> 
+        <link href="<?=base_url()?>/template/assets/plugins/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
 
     </head>
 
@@ -75,14 +80,12 @@
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
                                         <div class="dropdown-item noti-title">
-                                            <h5>Welcome</h5>
+                                        <h5>
+                                        <?= $session->get('nama_user'); ?> (<?= $session->get('levelnama'); ?>)
+                                         </h5>
                                         </div>
                                         <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-wallet m-r-5 text-muted"></i> My Wallet</a>
-                                        <a class="dropdown-item" href="#"><span class="badge badge-success float-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                        <a class="dropdown-item" href="login/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                                     </div>
                                 </li>
 
@@ -127,7 +130,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer">
-                    © 2018 Annex by Mannatthemes.
+                    © 2022 APSM by SRPEkspress.
                 </footer>
 
             </div>
@@ -152,6 +155,9 @@
         <!-- App js -->
         <script src="<?=base_url()?>/template/assets/js/app.js"></script>
         <script src="<?=base_url()?>/template/assets/plugins/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+        <script src="<?=base_url()?>/template/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="<?=base_url()?>/template/assets/plugins/timepicker/moment.js"></script>
+        <script src="<?=base_url()?>/template/assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
 
     </body>
 </html>

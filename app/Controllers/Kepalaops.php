@@ -10,8 +10,8 @@ class Kepalaops extends BaseController
 {
     public function index()
     {
-        // helper('Akses');
-        // if (cekakses()) 
+        helper('Akses');
+        if (cekakseskepalaops()) 
         {
 
             return view('kepalaops/viewtampildata');

@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Marketing</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Marketing Retail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,43 +13,49 @@
             <?= csrf_field(); ?>
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">No Order</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">No Order</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="no_order" name="no_order">
+                        <div class="invalid-feedback errorNoOrder">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Tanggal Order</label>
-                    <div class="col-sm-4">
-                        <input type="date" class="form-control" id="tgl_order" name="tgl_order">
+                    <label for="" class="col-sm-5 col-form-label">Tanggal Order</label>
+                    <div class="col-sm-6">
+                    <input type="date" class="form-control" id="tgl_order" name="tgl_order" value="<?= date('Y-m-d');?>">
+                    <div class="invalid-feedback errorTgl">
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Customer</label>
-                    <div class="col-sm-4">
+                    <label for="" class="col-sm-5 col-form-label">Nama Customer</label>
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_cust" name="nama_cust">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Kota Tujuan</label>
+                    <label for="" class="col-sm-5 col-form-label">Kota Tujuan</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="kota_tujuan" name="kota_tujuan">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Vendor</label>
+                    <label for="" class="col-sm-5 col-form-label">Nama Vendor</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_vendor" name="nama_vendor">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Nama Handling</label>
+                    <label for="" class="col-sm-5 col-form-label">Nama Handling</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="nama_handling" name="nama_handling">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="" class="col-sm-4 col-form-label">Status Marketing</label>
+                    <label for="" class="col-sm-5 col-form-label">Status Marketing Retail</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="status_marketing" name="status_marketing">
                     </div>
@@ -66,7 +72,6 @@
     </div>
 </div>
 <script>
-    
 $(document).ready(function() {
     $('.formmarketing').submit(function(e) {
         e.preventDefault();
@@ -85,20 +90,20 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.error) {
-                    if (response.error.nama_vendor) {
-                        $('#nama_vendor').addClass('is-invalid');
-                        $('.errorNama').html(response.error.nama_vendor);
+                    if (response.error.no_order) {
+                        $('#no_order').addClass('is-invalid');
+                        $('.errorNoOrder').html(response.error.no_order);
                     } else {
-                        $('#nama_vendor').removeClass('is-invalid');
-                        $('.errorNama').html('');
+                        $('#no_order').removeClass('is-invalid');
+                        $('.errorNoOrder').html('');
                     }
 
-                    if (response.error.telp_vendor) {
-                        $('#telp_vendor').addClass('is-invalid');
-                        $('.errorTelp').html(response.error.telp_vendor);
+                    if (response.error.tgl_order) {
+                        $('#tgl_order').addClass('is-invalid');
+                        $('.errorTgl').html(response.error.tgl_order);
                     } else {
-                        $('#telp_vendor').removeClass('is-invalid');
-                        $('.errorTelp').html('');
+                        $('#tgl_order').removeClass('is-invalid');
+                        $('.errorTgl').html('');
                     }
                 } else {
                     Swal.fire({

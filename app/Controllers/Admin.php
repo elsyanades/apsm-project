@@ -10,8 +10,8 @@ class Admin extends BaseController
 {
     public function index()
     {
-        // helper('Akses');
-        // if (cekakses()) 
+        helper('Akses');
+        if (cekaksesadmin()) 
         {
 
             return view('admin/viewtampildata');
@@ -58,7 +58,7 @@ class Admin extends BaseController
             //     <i class=\"fa fa-image\"></i>
             // </button>";
 
-                $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
+                // $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
                 $row[] = $no;
                 $row[] = $list->no_order;
                 $row[] = $list->nama_cust;

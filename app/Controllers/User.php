@@ -61,7 +61,9 @@ class User extends BaseController
                 // $row[] = "<input type=\"checkbox\" name=\"id_user[]\" class=\"centangId\" value=\"$list->id_user\">";
                 $row[] = $no;
                 $row[] = $list->nama_user;
+                $row[] = $list->username;
                 $row[] = $list->email_user;
+                $row[] = $list->levelnama;
                 $row[] = $tomboledit . " " . $tombolhapus;
                 $data[] = $row;
             }
