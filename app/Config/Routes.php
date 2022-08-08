@@ -133,6 +133,7 @@ $routes->get('monitoringcs/ambildata', 'Monitoringcs::ambildata');
 $routes->post('monitoringcs/simpandata', 'Monitoringcs::simpandata');
 $routes->get('monitoringcs/formtambah', 'Monitoringcs::formtambah');
 $routes->post('monitoringcs/formupload', 'Monitoringcs::formupload');
+$routes->post('monitoringcs/doupload', 'Monitoringcs::doupload');
 $routes->post('monitoringcs/formedit', 'Monitoringcs::formedit/$1');
 $routes->post('monitoringcs/hapus', 'Monitoringcs::hapus/$1');
 $routes->post('monitoringcs/updatedata', 'Monitoringcs::updatedata');
@@ -151,6 +152,8 @@ $routes->post('staffops/updatedata', 'Staffops::updatedata');
 $routes->get('laporan', 'Laporan::viewlaporan', ['filter' => 'ceklogin']);
 $routes->post('/Laporan', 'Laporan::index', ['filter' => 'ceklogin']);
 $routes->get('laporan/(:any)', 'Laporan::$1', ['filter' => 'ceklogin']);
+
+$routes->get('user/formedit', 'User::formedit/$1');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

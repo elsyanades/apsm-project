@@ -22,6 +22,7 @@ $session = \Config\Services::session();
         <link href="<?=base_url()?>/template/assets/plugins/node_modules/sweetalert2/dist/sweetalert2.min.css" type="text/css">
         <link href="<?=base_url()?>/template/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet"> 
         <link href="<?=base_url()?>/template/assets/plugins/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+        <link href="<?=base_url()?>/template/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
     </head>
 
@@ -84,7 +85,7 @@ $session = \Config\Services::session();
                                         <?= $session->get('nama_user'); ?> (<?= $session->get('levelnama'); ?>)
                                          </h5>
                                         </div>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
+                                        <a class="dropdown-item" href=""><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
                                         <a class="dropdown-item" href="login/logout"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
                                     </div>
                                 </li>
@@ -97,12 +98,12 @@ $session = \Config\Services::session();
                                         <i class="mdi mdi-menu"></i>
                                     </button>
                                 </li>
-                                <li class="hide-phone app-search">
-                                    <form role="search" class="">
-                                        <input type="text" placeholder="Search..." class="form-control">
+                                <!-- <li class="hide-phone app-search">
+                                    <form role="search">
+                                        <input type="text" name="searchdata" id="searchdata" placeholder="Search..." class="form-control">
                                         <a href=""><i class="fa fa-search"></i></a>
                                     </form>
-                                </li>
+                                </li> -->
                             </ul>
 
                             <div class="clearfix"></div>
@@ -158,6 +159,7 @@ $session = \Config\Services::session();
         <script src="<?=base_url()?>/template/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
         <script src="<?=base_url()?>/template/assets/plugins/timepicker/moment.js"></script>
         <script src="<?=base_url()?>/template/assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
+        <script src="<?=base_url()?>/template/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 
     </body>
 </html>

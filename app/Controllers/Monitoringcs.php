@@ -52,11 +52,12 @@ class Monitoringcs extends BaseController
 
                 $tombolhapus = "<button type=\"button\" class=\"btn btn-danger btn-sm\" onclick=\"hapus('" . $list->id . "')\">
                 <i class=\"fa fa-trash\"></i>
-            </button>";
+                 </button>";
 
-            //     $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id . "')\">
-            //     <i class=\"fa fa-image\"></i>
-            // </button>";
+                $tombolupload = "<button type=\"button\" class=\"btn btn-warning btn-sm\" onclick=\"upload('" . $list->id . "')\">
+                <i class=\"fa fa-image\"></i>
+                </button>";
+                $gambar = "<a href='". $list->upload_dokumen ."' target='blank' /><img src='". $list->upload_dokumen ."'  /></a>";
 
                 // $row[] = "<input type=\"checkbox\" name=\"id[]\" class=\"centangId\" value=\"$list->id\">";
                 $row[] = $no;
@@ -66,9 +67,9 @@ class Monitoringcs extends BaseController
                 $row[] = $list->status_barang_sudah_diterima;
                 $row[] = $list->update_status_ke_customer;
                 $row[] = $list->status_surat_jalan_kembali;
-                $row[] = $list->upload_dokumen;
+                $row[] = $gambar;
                 $row[] = $list->status_monitoring_cs;
-                $row[] = $tomboledit . " " . $tombolhapus;
+                $row[] = $tomboledit . " " . $tombolhapus. " " . $tombolupload;
                 $data[] = $row;
             }
             $output = [
@@ -285,103 +286,106 @@ class Monitoringcs extends BaseController
     //     }
     // }
 
-    // public function formupload()
-    // {
-    //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
+    public function formupload()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
 
-    //         $data = [
-    //             'id_vendor' => $id_vendor
-    //         ];
+            $data = [
+                'id' => $id
+            ];
 
-    //         $msg = [
-    //             'sukses' => view('monitoringcs/modalupload', $data)
-    //         ];
+            $msg = [
+                'sukses' => view('monitoringcs/modalupload', $data)
+            ];
 
-    //         echo json_encode($msg);
-    //     }
-    // }
+            echo json_encode($msg);
+        }
+    }
 
-    // public function doupload()
-    // {
-    //     if ($this->request->isAJAX()) {
-    //         $id_vendor = $this->request->getVar('id_vendor');
+    public function doupload()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
 
-    //         $validation = \Config\Services::validation();
+            $validation = \Config\Services::validation();
 
-    //         if ($_FILES['foto']['name'] == NULL && $this->request->getpost('imagecam') == '') {
-    //             $msg = ['error' => 'Silahkan pilih salah satu ya...'];
-    //         } elseif ($_FILES['foto']['name'] == NULL) {
+            if ($_FILES['upload_dokumen']['name'] == NULL && $this->request->getpost('imagecam') == '') {
+                $msg = ['error' => 'Silahkan pilih salah satu ya...'];
+            } elseif ($_FILES['upload_dokumen']['name'] == NULL) {
 
-    //             //cek dulu fotonya
-    //             $cekdata = $this->vend->find($id_vendor);
-    //             $fotolama = $cekdata['foto'];
-    //             if ($fotolama != NULL || $fotolama != "") {
-    //                 unlink($fotolama);
-    //             }
+                //cek dulu fotonya
+                $cekdata = $this->moncs->find($id);
+                $fotolama = $cekdata['upload_dokumen'];
+                if ($fotolama != NULL || $fotolama != "") {
+                    unlink($fotolama);
+                }
 
-    //             $image = $this->request->getPost('imagecam');
-    //             $image = str_replace('data:image/jpeg;base64,', '', $image);
+                $image = $this->request->getPost('imagecam');
+                $image = str_replace('data:image/jpeg;base64,', '', $image);
 
-    //             $image = base64_decode($image, true);
-    //             // echo $image;
-    //             $filename = $nobp . '.jpg';
-    //             file_put_contents(FCPATH . '/assets/images/foto/' . $filename, $image);
+                $image = base64_decode($image, true);
+                // echo $image;
+                $filename = $id . '.jpg';
+                file_put_contents(FCPATH . '/template/assets/images/dokumenupload/' . $filename, $image);
 
-    //             $updatedata = [
-    //                 'foto' => './assets/images/foto/' . $filename
-    //             ];
+                $updatedata = [
+                    'upload_dokumen' => './template/assets/images/dokumenupload/' . $filename
+                ];
 
-    //             $this->vend->update($id_vendor, $updatedata);
-    //             $msg = [
-    //                 'sukses' => 'Foto berhasil di upload menggunakan webcam'
-    //             ];
-    //         } else {
+                $this->moncs->update($id, $updatedata);
+                $msg = [
+                    'sukses' => 'Foto berhasil di upload menggunakan kamera'
+                ];
+            } else {
 
-    //             $valid = $this->validate([
-    //                 'foto' => [
-    //                     'label' => 'Upload Foto',
-    //                     'rules' => 'uploaded[foto]|mime_in[foto,image/png,image/jpg,image/jpeg]|is_image[foto]',
-    //                     'errors' => [
-    //                         'uploaded' => '{field} wajib diisi',
-    //                         'mime_in' => 'Harus dalam bentuk gambar, jangan file yang lain'
-    //                     ]
-    //                 ]
-    //             ]);
+                $valid = $this->validate([
+                    'upload_dokumen' => [
+                        'label' => 'Upload Foto',
+                        'rules' => 'uploaded[upload_dokumen]|mime_in[upload_dokumen,image/png,image/jpg,image/jpeg]|is_image[upload_dokumen]',
+                        'errors' => [
+                            'uploaded' => '{field} wajib diisi',
+                            'mime_in' => 'Harus dalam bentuk gambar, jangan file yang lain'
+                        ]
+                    ]
+                ]);
 
-    //             if (!$valid) {
-    //                 $msg = [
-    //                     'error' => [
-    //                         'foto' => $validation->getError('foto')
-    //                     ]
-    //                 ];
-    //             } else {
+                if (!$valid) {
+                    $msg = [
+                        'error' => [
+                            'upload_dokumen' => $validation->getError('upload_dokumen')
+                        ]
+                    ];
+                } else {
 
-    //                 //cek dulu fotonya
-    //                 $cekdata = $this->vend->find($id_vendor);
-    //                 $fotolama = $cekdata['foto'];
-    //                 if ($fotolama != NULL || $fotolama != "") {
-    //                     unlink($fotolama);
-    //                 }
+                    //cek dulu fotonya
+                    $cekdata = $this->moncs->find($id);
+                    $fotolama = isset($cekdata['upload_dokumen']);
+                    if ($fotolama != NULL || $fotolama != "") {
+                        unlink($fotolama);
+                    }
 
 
-    //                 $filefoto = $this->request->getFile('foto');
+                    $filefoto = $this->request->getFile('upload_dokumen');
+                    // Manipulasi gambar
+                     $image = \Config\Services::image()
+                    ->withFile($filefoto)
+                    ->resize(100, 50, true, 'height')
+                    ->save(FCPATH .'/template/assets/images/dokumenupload/'. $filefoto->getName());
 
-    //                 $filefoto->move('assets/images/foto', $nobp . '.' . $filefoto->getExtension());
+                    $updatedata = [
+                        'upload_dokumen' => './template/assets/images/dokumenupload/' . $filefoto->getName()
+                    ];
 
-    //                 $updatedata = [
-    //                     'foto' => './assets/images/foto/' . $filefoto->getName()
-    //                 ];
+                    $this->moncs->update($id, $updatedata);
 
-    //                 $this->vend->update($id_vendor, $updatedata);
+                    $msg = [
+                        'sukses' => 'Foto Berhasil diupload'
+                    ];
+                }
+            }
 
-    //                 $msg = [
-    //                     'sukses' => 'Berhasil diupload'
-    //                 ];
-    //             }
-    //         }
-
-    //         echo json_encode($msg);
-    //     }
-    // }
+            echo json_encode($msg);
+        }
+    } 
 }

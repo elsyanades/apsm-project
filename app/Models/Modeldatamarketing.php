@@ -15,6 +15,12 @@ class Modeldatamarketing extends Model
     protected $db;
     protected $dt;
 
+    function get_datacustomer()
+	{
+		# code...
+		$query = $this->db->get('customers');
+		return $query->row();
+	}
     function __construct(RequestInterface $request)
     {
         parent::__construct();

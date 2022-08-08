@@ -4,7 +4,7 @@
         <i class="fa fa-trash-o"></i> Hapus Banyak
     </button>
 </p>
-<table class="table table-sm table-striped" id="datavendor" style="width: 100%;">
+<table class="table table-bordered table-striped" id="datavendor" style="width: 100%;">
     <thead>
         <tr>
             <th>

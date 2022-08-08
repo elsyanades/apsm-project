@@ -4,7 +4,7 @@
         <i class="fa fa-trash-o"></i> Hapus Banyak
     </button> -->
 </p>
-<table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datamonitoringcs">
+<table class="table table-bordered table-striped" cellspacing="0" width="100%" id="datamonitoringcs">
     <thead>
         <tr>
             <!-- <th>
@@ -189,24 +189,24 @@ function hapus(id) {
     })
 }
 
-// function upload(id) {
-//     $.ajax({
-//         type: "post",
-//         url: "<?= site_url('monitoringcs/formupload') ?>",
-//         data: {
-//             id: id
-//         },
-//         dataType: "json",
-//         success: function(response) {
-//             if (response.sukses) {
-//                 $('.viewmodal').html(response.sukses).show();
-//                 $('#modalupload').modal('show');
-//             }
-//         },
-//         error: function(xhr, ajaxOptions, thrownError) {
-//             alert(xhr.status + "\n" + xhr.responseText + "\n" +
-//                 thrownError);
-//         }
-//     });
-// }
+function upload(id) {
+    $.ajax({
+        type: "post",
+        url: "<?= site_url('monitoringcs/formupload') ?>",
+        data: {
+            id: id
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.sukses) {
+                $('.viewmodal').html(response.sukses).show();
+                $('#modalupload').modal('show');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                thrownError);
+        }
+    });
+}
 </script>

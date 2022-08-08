@@ -123,6 +123,10 @@ if ($session->levelid == 6) :
         <li><a href="vendors">Data Vendor</a></li>
     </ul>
 </li>
+<?php
+$session = \Config\Services::session();
+if ($session->levelid == 1) :
+?>
 <li>
     <a href="laporan" class="waves-effect">
         <i class="mdi mdi-file-document"></i>
@@ -135,3 +139,4 @@ if ($session->levelid == 6) :
         <span> User </span>
     </a>
 </li>
+<?php endif; ?>

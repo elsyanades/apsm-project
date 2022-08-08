@@ -22,6 +22,8 @@
         <script src="<?=base_url()?>/template/assets/plugins/datatables/buttons.print.min.js"></script>
         <script src="<?=base_url()?>/template/assets/plugins/datatables/buttons.colVis.min.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+        
 <div class="col-sm-12">
     <div class="page-title-box">
     </div>

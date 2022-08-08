@@ -10,20 +10,20 @@
             </div>
             <?= form_open_multipart('', ['class' => 'formupload']) ?>
             <?= csrf_field(); ?>
-            <input type="hidden" value="<?= $id_vendor ?>" name="id_vendor">
+            <input type="hidden" value="<?= $id?>" name="id">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Upload Foto</label>
                     <div class="col-sm-4">
-                        <input type="file" class="form-control" id="foto" name="foto">
-                        <div class="invalid-feedback errorfoto">
+                        <input type="file" class="form-control" id="upload_dokumen" name="upload_dokumen">
+                        <div class="invalid-feedback errorUpload">
 
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="" class="col-sm-2 col-form-label">Ambil Gambar (WebCam)</label>
+                    <label for="" class="col-sm-2 col-form-label">Ambil Gambar (Kamera)</label>
                     <div class="col-sm-6">
                         <div id="my_camera">
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "post",
-            url: "<?= site_url('vendor/doupload') ?>",
+            url: "<?= site_url('monitoringcs/doupload') ?>",
             data: data,
             enctype: 'multipart/form-data',
             processData: false,
@@ -81,9 +81,9 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.error) {
-                    if (response.error.foto) {
-                        $('#foto').addClass('is-invalid');
-                        $('.errorfoto').html(response.error.foto);
+                    if (response.error.upload_dokumen) {
+                        $('#upload_dokumen').addClass('is-invalid');
+                        $('.errorUpload').html(response.error.upload_dokumen);
                     }
 
                     Swal.fire({

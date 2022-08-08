@@ -4,7 +4,7 @@
         <i class="fa fa-trash-o"></i> Hapus Banyak
     </button> -->
 </p>
-<table class="table table-striped table-bordered dataTable display" cellspacing="0" width="100%" id="datakepalaops">
+<table class="table table-bordered table-striped" cellspacing="0" width="100%" id="datakepalaops">
     <thead>
         <tr>
             <!-- <th>

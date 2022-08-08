@@ -80,7 +80,12 @@ class Marketing extends BaseController
         }
     }
 
-
+    function get_datacustomer()
+	{
+		# code...
+		$query = $this->db->get('customers');
+		return $query->row();
+	}
 
     public function formtambah()
     {
@@ -128,8 +133,11 @@ class Marketing extends BaseController
                     ]
                 ];
             } else {
+                $no = mt_rand(0, 999);
+                $temp = "SNE#22060".$no."";
                 $simpandata = [
-                    'no_order' => $this->request->getVar('no_order'),
+                    // 'no_order' => $this->request->getVar('no_order'),
+                    'no_order' => $temp,
                     'tgl_order' => $this->request->getVar('tgl_order'),
                     'nama_cust' => $this->request->getVar('nama_cust'),
                     'kota_tujuan' => $this->request->getVar('kota_tujuan'),
